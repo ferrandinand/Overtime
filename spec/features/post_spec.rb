@@ -2,10 +2,8 @@ require 'rails_helper'
  		
 describe 'navigate' do		
     before do
-      @user = User.create(email: "test@est.com", password: "eytodoe", password_confirmation: "eytodoe", first_name: "Jhon", last_name: "Snow")
+      @user = FactoryGirl.create(:user)
       login_as(@user, :scope => :user)
-      post1 = Post.create(date: Date.today, rationale: "Anything", user_id: @user.id)
-      post2 = Post.create(date: Date.today, rationale: "Anything 2", user_id: @user.id)
       visit posts_path   
     end
 
@@ -15,18 +13,22 @@ describe 'navigate' do
        end		
  		
        it "has a Post name" do		
-          expect(page).to have_content(/Posts/)		
+          post1 = FactoryGirl.create(:post) 
+          visit posts_path         
+          expect(page).to have_content(/MyText/)		
        end		
 
        it "has a list of posts" do
+          post2 = FactoryGirl.create(:post2)
+          visit posts_path 
           expect(page).to have_content(/Anything/)
        end
     end		
  		
   describe 'creation'do		
      before do		
-       user = User.create(email: "test@test.com", password: "eytodoe", password_confirmation: "eytodoe", first_name: "Jhon", last_name: "Snow")  		
-       login_as(user, :scope => :user)		
+       @user2 = FactoryGirl.create(:user2)
+       login_as(@user2, :scope => :user)		
        visit new_post_path		
      end 		
      it "has a new form that can be reached" do		

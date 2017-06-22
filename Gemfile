@@ -34,14 +34,15 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'factory_girl_rails', '~> 4.7'
 
 group :development, :test do
   gem 'byebug', platform: :mri 
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.7'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'meta_request'
-  gem 'factory_girl_rails'
 end
 
 group :development do
